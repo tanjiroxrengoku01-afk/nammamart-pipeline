@@ -19,3 +19,5 @@ airflow.db
 *.duckdb
 *.duckdb.wal
 __pycache__/
+# Part F experiment inputs: rebuilt by tests/make_experiment_data.py
+include/data/experiments/

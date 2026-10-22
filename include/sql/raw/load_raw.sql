@@ -16,7 +16,8 @@ FROM _incoming WHERE false;
 DELETE FROM {{ raw_table }} WHERE _run_id = '{{ run_id }}' AND _source_file = '{{ file }}';
 
 INSERT INTO {{ raw_table }} BY NAME
-SELECT *, rowid + 2 AS _source_row, {{ loaded_at }} AS _loaded_at,
+-- row_number over rowid, not rowid itself: inside a transaction DuckDB gives new rows transaction-local rowids
+SELECT *, row_number() OVER (ORDER BY rowid) + 1 AS _source_row, {{ loaded_at }} AS _loaded_at,
        '{{ file }}' AS _source_file, '{{ run_id }}' AS _run_id
 FROM _incoming;
 
