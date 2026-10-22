@@ -18,6 +18,10 @@ from datetime import timedelta
 import pandas as pd
 import pendulum
 from airflow.decorators import dag, task
+try:  # Airflow 3
+    from airflow.sdk.exceptions import AirflowFailException
+except ImportError:  # Airflow 2
+    from airflow.exceptions import AirflowFailException
 
 try:  # Airflow 3
     from airflow.sdk import get_current_context
@@ -25,6 +29,7 @@ except ImportError:  # Airflow 2
     from airflow.operators.python import get_current_context
 
 from include.nammamart_helpers import etl_steps as es
+from include.nammamart_helpers import observability as obs
 from include.nammamart_helpers.quality_rules import write_dq_results, write_quarantine
 
 LEARNER = "slick"  # <- change to your own name; it names the DAG, warehouse file and quarantine folder
@@ -61,8 +66,7 @@ def _as_of(params):
 
 
 def _connect():
-    import duckdb
-    return duckdb.connect(WAREHOUSE)
+    return obs.connect_warehouse(WAREHOUSE)  # waits if the ELT DAG holds the DuckDB lock
 
 
 def _make_extract(table):
@@ -98,6 +102,7 @@ def validate(extracts):
     try:
         write_dq_results(con, results)
         es.write_rejected(con, rejected, run_id, DAG_ID)
+        obs.report_volume(con, run_id, DAG_ID, len(raw["orders"]))
     finally:
         con.close()
     print(results[results["rows_failed"] > 0][["check_name", "severity", "rows_failed", "status"]].to_string(index=False))
@@ -182,6 +187,34 @@ def report(rec):
     return {"reports": list(es.REPORT_SQL)}
 
 
+@task(trigger_rule="all_done", retries=0)
+def audit_run():
+    """Runs even when something upstream failed: one row per run in pipeline_runs, then fail the run if needed."""
+    ctx = get_current_context()
+    ti, dag_run = ctx["ti"], ctx["dag_run"]
+    states = {k: v for k, v in obs.task_states(ti, DAG_ID, dag_run.run_id).items() if k != ti.task_id}
+    failed = sorted(k for k, v in states.items() if str(v) in obs.FAILED_STATES)
+    extracts = [ti.xcom_pull(task_ids=f"extract_{t}") for t in es.TABLES]
+    validated = ti.xcom_pull(task_ids="validate") or {}
+    loaded = ti.xcom_pull(task_ids="load") or {}
+    reported = ti.xcom_pull(task_ids="report")
+    status = "FAILED" if failed or not reported else "SUCCESS"
+    row = {"run_id": dag_run.run_id, "dag_id": DAG_ID, "start_time": dag_run.start_date,
+           "end_time": pendulum.now("UTC"),
+           "rows_extracted": sum(e["rows_read"] for e in extracts if e) if any(extracts) else None,
+           "rows_loaded": sum(loaded["fact_orders"]) if "fact_orders" in loaded else None,
+           "rows_quarantined": sum(v["quarantined"] for v in validated["summary"].values()) if validated else None,
+           "status": status, "failed_tasks": ", ".join(failed) or None}
+    con = _connect()
+    try:
+        obs.write_pipeline_run(con, row)
+    finally:
+        con.close()
+    print(f"pipeline_runs: {row}")
+    if status == "FAILED":
+        raise AirflowFailException(f"run failed; failed tasks: {failed or 'unknown'}")
+
+
 @dag(
     dag_id=DAG_ID,
     schedule="0 9 * * 1-6",  # 9:00 AM IST, Monday-Saturday
@@ -199,7 +232,7 @@ def nammamart_etl():
     t = transform(v)
     loaded = load(t, v)
     rec = reconcile_payments(t, v, loaded)
-    report(rec)
+    report(rec) >> audit_run()
 
 
 nammamart_etl()

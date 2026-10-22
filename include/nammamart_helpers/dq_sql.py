@@ -7,9 +7,15 @@ all text. Blanks may be NULL in DuckDB, so every text test goes through T(col) =
 
   insert_dq_results_sql(table, run_id, dag_id, run_ts)  -> INSERT that logs one dq_results row per check
   failure_reason_sql(table, run_ts)                      -> expression listing the Critical rules a row breaks
+  warning_reason_sql(table, run_ts)                      -> same, for the Warning rules (row still loads)
   critical_predicate_sql(table, run_ts)                  -> TRUE when a row breaks any Critical rule
+
+Every function takes src="raw_": the table prefix the predicates read. The ELT DAG passes src="wrk_" so the
+rules see only this run's slice of the append-only raw layer (wrk_orders, wrk_customers, ...).
 """
 from __future__ import annotations
+
+import re
 
 from .quality_rules import CRITICAL, DQ_RESULTS_DDL, rules_for
 
@@ -103,21 +109,24 @@ _missing = {r.name for r in rules_for("orders") + rules_for("payments") + rules_
 assert not _missing, f"Python rules and SQL predicates are out of sync: {sorted(_missing)}"
 
 
-def _sql(name, run_ts):
-    return SQL[name].replace(":run_ts", f"TIMESTAMP '{run_ts}'")
+_RAW_TABLE = re.compile(r"(?<![A-Za-z0-9_])raw_(orders|payments|customers|products|stores)(?![A-Za-z0-9_])")
 
 
-def insert_dq_results_sql(table, run_id, dag_id, run_ts):
+def _sql(name, run_ts, src="raw_"):
+    return _RAW_TABLE.sub(lambda m: src + m.group(1), SQL[name].replace(":run_ts", f"TIMESTAMP '{run_ts}'"))
+
+
+def insert_dq_results_sql(table, run_id, dag_id, run_ts, src="raw_"):
     """One INSERT ... SELECT that logs every check for `table`. Run create_dq_results_sql() first.
     Counts use plain scalar sub-selects (WHERE <predicate>) so sub-queries inside predicates stay valid."""
     selects = []
     for r in rules_for(table):
-        pred = _sql(r.name, run_ts)
+        pred = _sql(r.name, run_ts, src)
         if r.scope == "table":
             counts = f"SELECT 1 AS rows_checked, CASE WHEN {pred} THEN 1 ELSE 0 END AS rows_failed"
         else:
-            counts = (f"SELECT (SELECT COUNT(*) FROM raw_{table}) AS rows_checked, "
-                      f"(SELECT COUNT(*) FROM raw_{table} WHERE {pred}) AS rows_failed")
+            counts = (f"SELECT (SELECT COUNT(*) FROM {src}{table}) AS rows_checked, "
+                      f"(SELECT COUNT(*) FROM {src}{table} WHERE {pred}) AS rows_failed")
         bad = "'FAIL'" if r.severity == CRITICAL else "'WARN'"
         selects.append(
             f"SELECT '{run_id}' AS run_id, '{dag_id}' AS dag_id, '{r.name}' AS check_name, "
@@ -138,15 +147,24 @@ def create_dq_results_sql():
     return DQ_RESULTS_DDL
 
 
-def failure_reason_sql(table, run_ts):
+def _reasons_sql(table, run_ts, src, critical):
+    parts = [f"CASE WHEN {_sql(r.name, run_ts, src)} THEN '{r.name}' END"
+             for r in rules_for(table) if (r.severity == CRITICAL) == critical and r.scope == "row"]
+    return "concat_ws('; ', " + ", ".join(parts) + ")" if parts else "''"
+
+
+def failure_reason_sql(table, run_ts, src="raw_"):
     """SQL expression: '; '-joined names of the Critical rules the row breaks (NULL-safe, '' when none).
     Paste into a staging model as `... AS failure_reason`."""
-    parts = [f"CASE WHEN {_sql(r.name, run_ts)} THEN '{r.name}' END"
-             for r in rules_for(table) if r.severity == CRITICAL and r.scope == "row"]
-    return "concat_ws('; ', " + ", ".join(parts) + ")"
+    return _reasons_sql(table, run_ts, src, critical=True)
 
 
-def critical_predicate_sql(table, run_ts):
-    parts = [f"COALESCE({_sql(r.name, run_ts)}, false)" for r in rules_for(table)
+def warning_reason_sql(table, run_ts, src="raw_"):
+    """Same as failure_reason_sql for the Warning rules: the row loads, the warning is kept for the audit trail."""
+    return _reasons_sql(table, run_ts, src, critical=False)
+
+
+def critical_predicate_sql(table, run_ts, src="raw_"):
+    parts = [f"COALESCE({_sql(r.name, run_ts, src)}, false)" for r in rules_for(table)
              if r.severity == CRITICAL and r.scope == "row"]
     return " OR ".join(parts)
