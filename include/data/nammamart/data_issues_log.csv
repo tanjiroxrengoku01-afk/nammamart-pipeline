@@ -1,0 +1,239 @@
+file,row_key,column,problem,quality_dimension,proposed_rule,severity
+orders.csv,ORD001462,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001441,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001692,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD002129,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001239,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD000783,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD000539,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001434,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001326,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001549,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001870,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD001110,order_id,Exact duplicate row,Uniqueness,Keep first row per order_id; quarantine extras,Critical
+orders.csv,ORD002255,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000701,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000997,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000580,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002019,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002262,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002149,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002367,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD001332,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD001918,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002156,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000583,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000790,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000764,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD002219,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD001532,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000022,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD001373,customer_id,customer_id is blank,Completeness,customer_id NOT NULL,Critical
+orders.csv,ORD000403,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD001610,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD000534,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD000362,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD002012,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD000946,order_ts,"Unparseable/blank timestamp (N/A, 2026-13-05, 31/09/2026)",Validity,order_ts parses as YYYY-MM-DD HH:MM:SS,Critical
+orders.csv,ORD002119,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001693,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001089,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001121,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001765,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001965,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001725,order_ts,"Future-dated order_ts (Oct/Nov 2026, Jan 2027)",Timeliness,order_ts <= run time,Critical
+orders.csv,ORD001066,order_status,Wrong casing ('delivered'),Validity,Standardise to upper case before check,Warning
+orders.csv,ORD000153,order_status,Wrong casing ('delivered'),Validity,Standardise to upper case before check,Warning
+orders.csv,ORD000500,order_status,Invalid status ('Pending??'),Validity,"order_status in {DELIVERED,CANCELLED,RETURNED}",Critical
+orders.csv,ORD001970,order_status,Invalid status ('Pending??'),Validity,"order_status in {DELIVERED,CANCELLED,RETURNED}",Critical
+orders.csv,ORD001637,order_status,Invalid status ('Pending??'),Validity,"order_status in {DELIVERED,CANCELLED,RETURNED}",Critical
+orders.csv,ORD001812,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD001414,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD000159,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD001364,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD000433,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD002356,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD001640,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD001874,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD000934,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD000691,payment_mode,"Non-standard payment_mode (upi, 'UPI ', CARD, cod, Cashh)",Validity,trim + map to allowed list; unmappable ('Cashh') -> quarantine or map by rule agreed with client,Warning
+orders.csv,ORD000469,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD001296,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD001459,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD000867,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD000462,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD002360,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD001724,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD000099,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD001124,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD001384,quantity,"quantity <= 0 (0, -1..-3)",Accuracy,quantity > 0,Critical
+orders.csv,ORD002103,discount_pct,discount_pct outside 0-100 (120/150/250),Validity,0 <= discount_pct <= 100,Critical
+orders.csv,ORD001468,discount_pct,discount_pct outside 0-100 (120/150/250),Validity,0 <= discount_pct <= 100,Critical
+orders.csv,ORD001237,discount_pct,discount_pct outside 0-100 (120/150/250),Validity,0 <= discount_pct <= 100,Critical
+orders.csv,ORD002103,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002305,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002004,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD000845,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD000964,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002298,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002031,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD000801,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD000880,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001274,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD000677,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002223,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002128,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001624,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD002244,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001755,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001468,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001237,order_amount,order_amount != qty x price x (1-disc),Accuracy,"recompute and compare, tolerance 0.01",Critical
+orders.csv,ORD001554,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD001800,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD000731,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD001277,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD000326,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD001515,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD002229,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD000878,delivery_minutes,DELIVERED order with no delivery_minutes,Completeness,DELIVERED => delivery_minutes NOT NULL,Critical
+orders.csv,ORD001037,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD002101,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD000455,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD001104,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD000020,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD000424,delivery_minutes,Impossible delivery time (480/900/1440 min),Accuracy,delivery_minutes < 120 (warn if >35),Critical
+orders.csv,ORD001799,store_id,"store_id not in stores (S17,S99,S00)",Consistency,FK store_id exists in stores,Critical
+orders.csv,ORD001046,store_id,"store_id not in stores (S17,S99,S00)",Consistency,FK store_id exists in stores,Critical
+orders.csv,ORD001492,store_id,"store_id not in stores (S17,S99,S00)",Consistency,FK store_id exists in stores,Critical
+orders.csv,ORD001275,store_id,"store_id not in stores (S17,S99,S00)",Consistency,FK store_id exists in stores,Critical
+orders.csv,ORD002126,store_id,"store_id not in stores (S17,S99,S00)",Consistency,FK store_id exists in stores,Critical
+orders.csv,ORD000986,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD001058,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD001685,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD000070,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD000789,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD000596,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD000134,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD000965,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+orders.csv,ORD002179,product_id,product_id not in products (P9xxx),Consistency,FK product_id exists in products,Critical
+payments.csv,PAY0000509,payment_id,Exact duplicate payment row,Uniqueness,payment_id unique,Critical
+payments.csv,PAY0001651,payment_id,Exact duplicate payment row,Uniqueness,payment_id unique,Critical
+payments.csv,PAY0002000,payment_id,Exact duplicate payment row,Uniqueness,payment_id unique,Critical
+payments.csv,PAY0000755,payment_id,Exact duplicate payment row,Uniqueness,payment_id unique,Critical
+payments.csv,PAY0002219,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002220,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002223,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002221,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002224,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002218,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002222,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0002217,order_id,Orphan payment: order_id not in orders (ORD9xxxxx),Consistency,payment.order_id exists in orders,Critical
+payments.csv,PAY0001568,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0002175,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000116,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000751,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000944,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000791,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0001111,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0001322,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000954,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0000737,amount_paid,"amount_paid <= 0 (6 negative, 4 zero)",Accuracy,amount_paid > 0,Critical
+payments.csv,PAY0002188,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0001850,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0001954,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0000817,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0001359,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0002208,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0002113,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0001862,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0000522,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0000044,payment_mode,Non-standard payment_mode,Validity,trim + map to allowed list,Warning
+payments.csv,PAY0000396,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0000127,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0001908,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0001037,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0000337,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0001488,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0000267,payment_ts,Future-dated payment_ts,Timeliness,payment_ts <= run time,Critical
+payments.csv,PAY0001568,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000354,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000779,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000323,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0001167,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0001499,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000909,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000586,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000161,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0002183,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000044,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0001813,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0001139,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+payments.csv,PAY0000429,amount_paid,SUCCESS payment != order_amount (short-paid by 10-100 etc.),Consistency,SUCCESS amount_paid = order_amount -> reconciliation table,Critical
+customers.csv,C00103,customer_id,Duplicate customer_id with conflicting phone/area,Uniqueness,one row per customer_id (pick latest/most complete; log conflict),Critical
+customers.csv,C00252,customer_id,Duplicate customer_id with conflicting phone/area,Uniqueness,one row per customer_id (pick latest/most complete; log conflict),Critical
+customers.csv,C00226,customer_id,Duplicate customer_id with conflicting phone/area,Uniqueness,one row per customer_id (pick latest/most complete; log conflict),Critical
+customers.csv,C00036,customer_id,Duplicate customer_id with conflicting phone/area,Uniqueness,one row per customer_id (pick latest/most complete; log conflict),Critical
+customers.csv,C00313,customer_id,Duplicate customer_id with conflicting phone/area,Uniqueness,one row per customer_id (pick latest/most complete; log conflict),Critical
+customers.csv,C00337,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00307,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00063,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00045,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00363,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00310,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00327,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00112,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00193,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00392,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00062,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00067,email,"Invalid email (N/A, missing @, no TLD)",Validity,email regex,Warning
+customers.csv,C00151,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00240,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00095,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00357,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00130,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00290,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00339,phone,Phone not 10 digits,Validity,phone = 10 digits,Warning
+customers.csv,C00132,pincode,Pincode '5600XX' not 6 digits,Validity,pincode = 6 digits,Warning
+customers.csv,C00083,pincode,Pincode '5600XX' not 6 digits,Validity,pincode = 6 digits,Warning
+customers.csv,C00166,pincode,Pincode '5600XX' not 6 digits,Validity,pincode = 6 digits,Warning
+customers.csv,C00355,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00394,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00233,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00142,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00328,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00219,city,city blank,Completeness,city NOT NULL (warn),Warning
+customers.csv,C00199,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00171,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00133,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00032,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00031,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00196,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00136,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00092,loyalty_tier,"Inconsistent casing (BRONZE, bronze, SILVER)",Consistency,INITCAP loyalty_tier,Warning
+customers.csv,C00400,signup_date,Future signup_date,Timeliness,signup_date <= run date,Critical
+customers.csv,C00398,signup_date,Future signup_date,Timeliness,signup_date <= run date,Critical
+customers.csv,C00038,signup_date,Future signup_date,Timeliness,signup_date <= run date,Critical
+products.csv,P0030,product_id,Duplicate product_id: '(old)' row with older MRP,Uniqueness,one row per product_id; drop '(old)' version,Critical
+products.csv,P0140,product_id,Duplicate product_id: '(old)' row with older MRP,Uniqueness,one row per product_id; drop '(old)' version,Critical
+products.csv,P0051,category,category blank,Completeness,category NOT NULL,Critical
+products.csv,P0060,category,category blank,Completeness,category NOT NULL,Critical
+products.csv,P0068,category,category blank,Completeness,category NOT NULL,Critical
+products.csv,P0109,mrp,Negative mrp,Accuracy,mrp > 0,Critical
+products.csv,P0019,cost_price,cost_price > mrp (selling below cost),Accuracy,cost_price <= mrp,Critical
+products.csv,P0073,cost_price,cost_price > mrp (selling below cost),Accuracy,cost_price <= mrp,Critical
+products.csv,P0074,cost_price,cost_price > mrp (selling below cost),Accuracy,cost_price <= mrp,Critical
+products.csv,P0109,cost_price,cost_price > mrp (selling below cost),Accuracy,cost_price <= mrp,Critical
+products.csv,P0117,cost_price,cost_price > mrp (selling below cost),Accuracy,cost_price <= mrp,Critical
+stores.csv,S07,zone,zone blank (S07 BTM Layout; South by geography - confirm),Completeness,zone NOT NULL,Critical
+stores.csv,S12,capacity_orders_per_day,capacity = 0 (S12),Accuracy,capacity > 0,Warning
+orders_2026-10-01_increment.csv,ORD000017,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000271,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000332,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000337,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000584,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000708,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD000822,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD001025,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD001067,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders_2026-10-01_increment.csv,ORD001990,order_status,"Correction of existing order (DELIVERED -> RETURNED): upsert, don't append",Consistency,MERGE on order_id,Warning
+orders.csv,(file),order_ts,Latest valid order is 2026-09-30; stale vs run date,Timeliness,latest order_ts within 1 day of run (warn),Warning

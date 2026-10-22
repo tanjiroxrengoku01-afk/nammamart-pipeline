@@ -18,3 +18,4 @@ airflow.db
 **/.astro/manifest.slim.json
 *.duckdb
 *.duckdb.wal
+__pycache__/
